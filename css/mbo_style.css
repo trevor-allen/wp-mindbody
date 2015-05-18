@@ -1,3 +1,29 @@
-/* 
+/*
 We want to do as little as possible here so CSS can be defined in theme.
 */
+
+.mbo-table {
+  font-size: 1em;
+}
+
+.mbo-table th {
+  background-color: rgba(23, 61, 80, 0.85);
+  color: #fff;
+  text-transform: uppercase;
+  margin-top: 1em;
+}
+
+.mbo-table tr td {
+  padding: 1em;
+  text-align: left;
+  white-space: nowrap;
+  border-bottom: 1px solid #ddd;
+}
+
+.mbo-table tr:nth-child(2n) {
+  background-color: rgba(23, 61, 80, 0.1);
+}
+
+.mbo-table tr:nth-child(2n+1) {
+  background-color: rgba(33, 71, 90, 0.02);
+}

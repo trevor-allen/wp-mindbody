@@ -13,8 +13,7 @@
 *	Assign global variables
 *
 */
-
-$plugin_url = WP_PLUGIN_URL . '/mZ-mindbody-api';
+$mbo_dir = plugin_dir_path( __FILE__ );
 $options = array();
 $mz_error = '';
 
@@ -133,8 +132,6 @@ function mz_mindbody_settings_menu() {
 }
 add_action ('admin_menu', 'mz_mindbody_settings_menu');
 
-
-
 function mz_mindbody_settings_page() {
 
 	if(!current_user_can('manage_options')) {
@@ -151,11 +148,8 @@ function mz_mindbody_settings_page() {
 		if( $hidden_field == 'Y' ) {
 
 			$mz_source_name = esc_html( $_POST['mz_source_name'] );
-
 			$mz_mindbody_password = esc_html( $_POST['mz_mindbody_password'] );
-
 			$mz_mindbody_siteID = esc_html( $_POST['mz_mindbody_siteID']);
-
 			$mz_mindbody_eventID = esc_html( $_POST['mz_mindbody_eventID']);
 
 
@@ -174,34 +168,21 @@ function mz_mindbody_settings_page() {
 	$options = get_option( 'mz_mindbody_options' );
 
 	if( $options != '' ) {
-
 		$mz_source_name 			= $options['mz_source_name'];
 		$mz_mindbody_password = $options['mz_mindbody_password'];
 		$mz_mindbody_siteID 	= $options['mz_mindbody_siteID'];
 		$mz_mindbody_eventID 	= $options['mz_mindbody_eventID'];
-
 	}
-		// $options = get_option('mz_mindbody_options',__('Option Not Set'));
-		//
-		// $mz_source_name = (isset($options['mz_source_name'])) ? $options['mz_source_name'] : _e('YOUR SOURCE NAME');
-		//
-		// $mz_mindbody_password = (isset($options['mz_mindbody_password'])) ? $options['mz_mindbody_password'] : _e('YOUR MINDBODY PASSWORD');
-		//
-		// $mz_mindbody_siteID = (isset($options['mz_mindbody_siteID'])) ? $options['mz_mindbody_siteID'] : _e('YOUR SITE ID');
-		//
-		// $mz_mindbody_eventID = (isset($options['mz_mindbody_eventID'])) ? $options['mz_mindbody_eventID'] : _e('Event Category IDs');
-
-	require( 'inc/settings-page.php' );
-
+	require( 'template/settings-page.php' );
 }
 
 
-function mz_mindbody_styles() {
+function mbo_admin_styles() {
 
-	//wp_enqueue_style( 'mz_mindbody_styles', plugins_url( 'file.css' ) );
+	wp_enqueue_style( 'mbo_main', plugins_url( 'mbo_style.css' ) );
 
 }
-add_action( 'admin_head', 'mz_mindbody_styles' );
+add_action( 'admin_head', 'mbo_admin_styles' );
 
 function mz_mindbody_debug_text() {
 	//$mb->debug();
@@ -271,6 +252,9 @@ add_action( 'admin_init', 'mz_mindbody_debug_text' );
 // else
 // {// non-admin enqueues, actions, and filters
 //
+if(!is_admin()) {
+
+
 	add_action('init', 'myStartSession', 1);
 	add_action('wp_logout', 'myEndSession');
 	add_action('wp_login', 'myEndSession');
@@ -280,53 +264,49 @@ add_action( 'admin_init', 'mz_mindbody_debug_text' );
 			if (session_status() == PHP_SESSION_NONE) {
 				session_start();
 			}
-		}else{
+		} else{
 			if(!session_id()) {
 				session_start();
 			}
 		}
 	}
-//
-// 	function myEndSession() {
-// 		session_destroy ();
-// 	}
-//
-// 	add_action( 'wp_enqueue_script', 'load_jquery' );
-// 	function load_jquery() {
-// 		wp_enqueue_script( 'jquery' );
-// 	}
-//
-// 	function mZ_mindbody_schedule_init() {
-// 		wp_register_style('mZ_mindbody_schedule_bs', plugins_url('/bootstrap/css/bootstrap.min.css',__FILE__ ));
-// 		wp_enqueue_style('mZ_mindbody_schedule_bs');
-// 	}
-// 	add_action( 'init','mZ_mindbody_schedule_init');
-//
-// 	add_action('init', 'enqueue_mz_mbo_scripts');
-// 	function enqueue_mz_mbo_scripts() {
-// 		wp_register_script( 'mz_mbo_bootstrap_script', plugins_url('/bootstrap/js/bootstrap.min.js', __FILE__), array( 'jquery' ),'3.1.1', true );
-// 		wp_enqueue_script( 'mz_mbo_bootstrap_script' );
-// 		wp_register_script( 'mz_mbo_modal_script', plugins_url('/js/mz_mbo_modal.js', __FILE__), array( 'jquery' ),'1', true );
-// 		wp_enqueue_script( 'mz_mbo_modal_script' );
-// 	}
-//
-// 	include_once(dirname( __FILE__ ) . '/mindbody-php-api/MB_API.php');
-//
-// 	foreach ( glob( plugin_dir_path( __FILE__ )."inc/*.php" ) as $file )
-// 	include_once $file;
-//
-// 	add_shortcode('mz-mindbody-show-schedule', 'mZ_mindbody_show_schedule' );
-// 	add_shortcode('mz-mindbody-show-events', 'mZ_mindbody_show_events' );
-// 	add_shortcode('mz-mindbody-staff-list', 'mZ_mindbody_staff_listing' );
-// 	add_shortcode('mz-mindbody-login', 'mZ_mindbody_login' );
-// 	add_shortcode('mz-mindbody-logout', 'mZ_mindbody_logout' );
-// 	add_shortcode('mz-mindbody-signup', 'mZ_mindbody_signup' );
-// 	add_shortcode('mz-mindbody-activation', 'mZ_mindbody_activation' );
-// }//EOF Not Admin
+
+	function myEndSession() {
+		session_destroy();
+	}
+
+	function mbo_styles_init() {
+		wp_enqueue_style( 'mbo_main', plugins_url( '/css/mbo_style.css', __FILE__ ) );
+	}
+	add_action( 'init','mbo_styles_init');
+
+	//add_action('init', 'enqueue_mz_mbo_scripts');
+	//function enqueue_mz_mbo_scripts() {
+		//wp_register_script( 'mz_mbo_bootstrap_script', plugins_url('/bootstrap/js/bootstrap.min.js', __FILE__), array( 'jquery' ),'3.1.1', true );
+		//wp_enqueue_script( 'mz_mbo_bootstrap_script' );
+		//wp_register_script( 'mz_mbo_modal_script', plugins_url('/js/mz_mbo_modal.js', __FILE__), array( 'jquery' ),'1', true );
+		//wp_enqueue_script( 'mz_mbo_modal_script' );
+	//}
+
+	include_once(dirname( __FILE__ ) . '/mindbody-php-api/MB_API.php');
+
+	foreach ( glob( plugin_dir_path( __FILE__ )."inc/*.php" ) as $file ) {
+		include_once $file;
+	}
+
+	add_shortcode('mz-mindbody-show-schedule', 'mZ_mindbody_show_schedule' );
+	add_shortcode('mz-mindbody-show-events', 'mZ_mindbody_show_events' );
+	add_shortcode('mz-mindbody-staff-list', 'mZ_mindbody_staff_listing' );
+	add_shortcode('mz-mindbody-login', 'mZ_mindbody_login' );
+	add_shortcode('mz-mindbody-logout', 'mZ_mindbody_logout' );
+	add_shortcode('mz-mindbody-signup', 'mZ_mindbody_signup' );
+	add_shortcode('mz-mindbody-activation', 'mZ_mindbody_activation' );
+
+}//EOF Not Admin
 
 if (phpversion() >= 5.3) {
 	include_once('php_variants/sort_newer.php');
-}else{
+} else {
 	include_once('php_variants/sort_older.php');
 }
 
@@ -373,8 +353,7 @@ function mz_getDateRange($date, $duration=7) {
 	return $return;
 }
 
-function mz_mbo_schedule_nav($date, $period="Week", $duration=7)
-{
+function mz_mbo_schedule_nav($date, $period="Week", $duration=7) {
 	$sched_nav = '';
 	$mz_schedule_page = get_permalink();
 	//Navigate through the weeks
@@ -392,20 +371,16 @@ function mz_mbo_schedule_nav($date, $period="Week", $duration=7)
 
 
 function mz_validate_date( $string ) {
-	if (preg_match('/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/',$string))
-	{
+	if (preg_match('/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/',$string)) {
 		return $string;
-	}
-	else
-	{
+	} else {
 		return "mz_validate_weeknum error";
 	}
 }
 
 
 //Format arrays for display in development
-function mz_pr($data)
-{
+function mz_pr($data) {
 	echo "<pre>";
 	print_r($data);
 	echo "</pre>";

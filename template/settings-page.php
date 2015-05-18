@@ -1,20 +1,19 @@
-	<?php if(!mz_soap_check() || !mz_pear_check()): ?>
-		<div class="error">
-			<?php
-			global $mz_error;
-			echo $mz_error . 'MZ Mindbody API requires SOAP and PEAR. Please contact your hosting provider or enable via your CPANEL of php.ini file.'; ?>
-		</div>
+<?php if(!mz_soap_check() || !mz_pear_check()): ?>
+	<div class="error">
+		<?php
+		global $mz_error;
+		echo $mz_error . 'MZ Mindbody API requires SOAP and PEAR. Please contact your hosting provider or enable via your CPANEL of php.ini file.'; ?>
+	</div>
 
-	<?php endif; ?>
+<?php endif; ?>
 
-	<?php if(mz_soap_check() && mz_pear_check()): ?>
+<?php if(mz_soap_check() && mz_pear_check()): ?>
 
-		<div style="width:99%; padding: 5px;">
-			<?php esc_attr_e('Congratulations. Your server appears to be configured to integrate with mindbodyonline.'); ?>
-		</div>
+	<div style="width:99%; padding: 5px;">
+		<?php esc_attr_e('Congratulations. Your server appears to be configured to integrate with mindbodyonline.'); ?>
+	</div>
 
-	<?php endif; ?>
-
+<?php endif; ?>
 
 	<div class="wrap">
 		<div id="icon-options-general" class="icon32"></div>
@@ -28,7 +27,7 @@
 							<h3><span><?php esc_attr_e( 'Account and Event options', 'wp_admin_style' ); ?></span></h3>
 							<div class="inside">
 
-								<?php screen_icon(); ?>
+								<?php //screen_icon(); ?>
 
 								<p><?php esc_attr_e('Enter your mindbody credentials below.'); ?></p>
 								<p><?php esc_attr_e('If you do not have them yet, visit the'); ?> <a href="https://api.mindbodyonline.com/Home/LogIn"><?php esc_attr_e('MindBodyOnline developers website'); ?></a>
