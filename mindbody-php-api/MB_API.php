@@ -1,14 +1,17 @@
 <?php
+
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 class MB_API {
 	protected $client;
-	/*
-** Uncomment if you need user credentials
-protected $userCredentials = array(
-"Username"=>'REPLACE_WITH_YOUR_USERNAME',
-"Password"=>'REPLACE_WITH_YOUR_PASSWORD',
-"SiteIDs"=>array('REPLACE_WITH_YOUR_SITE_ID')
-);
-*/
+
+	//Uncomment if you need user credentials
+	protected $userCredentials = array(
+	"Username"=>'trevoristall',
+	"Password"=>'kath4leyb0',
+	"SiteIDs"=>array('16668')
+	);
+
 	protected $appointmentServiceWSDL = "https://api.mindbodyonline.com/0_5/AppointmentService.asmx?WSDL";
 	protected $classServiceWSDL = "https://api.mindbodyonline.com/0_5/ClassService.asmx?WSDL";
 	protected $clientServiceWSDL = "https://api.mindbodyonline.com/0_5/ClientService.asmx?WSDL";
@@ -23,8 +26,8 @@ protected $userCredentials = array(
 
 	public $soapOptions = array('soap_version'=>SOAP_1_1, 'trace'=>true);
 	public $debugSoapErrors = true;
-	
-/*
+
+	/*
 	** initializes the apiServices and apiMethods arrays
 	*/
 	public function __construct($sourceCredentials = array()) {
@@ -41,11 +44,11 @@ protected $userCredentials = array(
 		);
 		// set apiMethods array with available methods from Mindbody services
 		if (phpversion() >= 5.3) {
-            include_once('php_variants/construct_newer.php');
-        }else{
-            include_once('php_variants/construct_older.php');
-        }
-		
+      include_once('php_variants/construct_newer.php');
+    } else {
+      include_once('php_variants/construct_older.php');
+    }
+
 		// set sourceCredentials
 		if(!empty($sourceCredentials)) {
 			if(!empty($sourceCredentials['SourceName'])) {
@@ -130,7 +133,7 @@ protected $userCredentials = array(
 	public function getXMLRequest() {
 		return $this->client->__getLastRequest();
 	}
-	
+
 	public function getXMLResponse() {
 		return $this->client->__getLastResponse();
 	}
@@ -156,17 +159,17 @@ protected $userCredentials = array(
 		}
 		return $array;
 	}
-	
+
   	/*
 	** Used by versions of php < 5.3
 	*/
-    private function extract_client($n){
-					$start = 1+strpos($n, ' ');
-					$end = strpos($n, '(');
-					$length = $end - $start;
-					return substr($n, $start, $length);
-				    }
-				
+  private function extract_client($n){
+				$start = 1+strpos($n, ' ');
+				$end = strpos($n, '(');
+				$length = $end - $start;
+				return substr($n, $start, $length);
+  }
+
   	/*
 	** overrides SelectDataXml method to remove some invalid XML element names
 	**

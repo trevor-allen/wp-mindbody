@@ -4,20 +4,35 @@ We want to do as little as possible here so CSS can be defined in theme.
 
 .mbo-table {
   font-size: 1em;
+  max-width: 100%;
+  width: 100%;
+}
+
+.mbo-table th:first-child {
+  border-radius: 3px 0 0 0;
+}
+
+.mbo-table th:nth-child(4) {
+  border-radius: 0 3px 0 0;
 }
 
 .mbo-table th {
-  background-color: rgba(23, 61, 80, 0.85);
+  background-color: rgba(23, 51, 85, .8);
   color: #fff;
   text-transform: uppercase;
-  margin-top: 1em;
+  text-align: left;
+  padding: .7em;
 }
 
 .mbo-table tr td {
-  padding: 1em;
+  padding: .5em;
   text-align: left;
   white-space: nowrap;
   border-bottom: 1px solid #ddd;
+}
+
+.mbo-table .mbo-table-head + tr td {
+  border-bottom: none;
 }
 
 .mbo-table tr:nth-child(2n) {

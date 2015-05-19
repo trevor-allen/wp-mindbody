@@ -1,8 +1,11 @@
 <?php
+
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 /*
 *	Plugin Name: MBO Interface - Schedule, Events, Staff	Display
 *	Description: Wordpress shortcodes to use MindbodyOnline data
-*	Version: 1.0
+*	Version: 1.2
 *	Author: Trevor Allen
 *	Author URI: http://www.Quillflow.com/
 *	Plugin URI: http://www.Quillflow.com/
@@ -123,8 +126,8 @@ class mZ_Mindbody_day_schedule extends WP_Widget {
 function mz_mindbody_settings_menu() {
 	//create submenu under Settings
 	add_options_page(
-		'MZ Mindbody Settings',
-		'MZ Mindbody',
+		'Mindbody Settings',
+		'Mindbody',
 		'manage_options',
 		__FILE__,
 		'mz_mindbody_settings_page'

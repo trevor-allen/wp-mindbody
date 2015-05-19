@@ -7,18 +7,18 @@ function mZ_mindbody_show_events ()
  	$mz_sessions = array($options['mz_mindbody_eventID']);
 
 	$return = '';
-	
+
     $mz_date = empty($_GET['mz_date']) ? date_i18n('Y-m-d') : mz_validate_date($_GET['mz_date']);
-    
+
 	// only make API call if we have sessions set
 	if (!empty($mz_sessions) && ($mz_sessions[0] != 0))
 	{
 	    $mz_timeframe = array_slice(mz_getDateRange($mz_date, $mz_event_calendar_duration), 0, 1);
-	    
+
 	    //While we still eed to support php 5.2 and can't use [0] on above
 	    $mz_timeframe = array_pop($mz_timeframe);
-	    
-        $mz_timeframe = array_merge($mz_timeframe, array('SessionTypeIDs'=>$mz_sessions));
+
+      $mz_timeframe = array_merge($mz_timeframe, array('SessionTypeIDs'=>$mz_sessions));
 
 		// START caching configuration
 		$mz_events_cache = "mz_events_cache";
@@ -41,11 +41,11 @@ function mZ_mindbody_show_events ()
 
 		// keep this here
 		//$return .= $mb->debug();
-        
+
 		if(!empty($mz_event_data['GetClassesResult']['Classes']['Class']))
 		{
 			$number_of_events = count($mz_event_data['GetClassesResult']['Classes']['Class']);
-			
+
 			if ($number_of_events >= 1)
 			{
 				$return .= '<p>' .$mz_event_calendar_duration .' '. __('Day Event Calendar');
@@ -93,11 +93,11 @@ function mZ_mindbody_show_events ()
 							$return .= '<div id="mz_mindbody_events_details">';
 							$return .= "<h3>$className</h3>";
 							$return .= '<a class="btn btn-success" href="' . $eventLinkURL . '">' . __('Sign-Up') . '</a>';
-							$return .= '<p class="mz_event_staff">with '. $staffName.'</p>';							
+							$return .= '<p class="mz_event_staff">with '. $staffName.'</p>';
 
 							$return .= '<h4 class="mz_event_staff">'.$day_and_date.', ' . date_i18n('g:i a', strtotime($startDateTime)).' - ';
 							$return .= date_i18n('g:i a', strtotime($endDateTime)) . '</h4>';
-							
+
 							$return .= '</div>';
 
 							$return .= '</div>';

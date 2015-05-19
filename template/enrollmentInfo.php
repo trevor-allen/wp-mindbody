@@ -1,12 +1,11 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
-
-<?php if(!empty($mz_schedule_data['GetClassesResult']['Classes']['Class'])) : ?>
+<?php if(!empty($enrollmentInfo['GetClassesResult']['Classes']['Class'])) : ?>
 
 <!-- todo -->
 <?php $mb->debug(); ?>
 
 <?php
-  $mz_days = $mb->makeNumericArray($mz_schedule_data['GetClassesResult']['Classes']['Class']);
+  $mz_days = $mb->makeNumericArray($enrollmentInfo['GetClassesResult']['Classes']['Class']);
   $mz_days = sortClassesByDate($mz_days);
   if ($type=='week') {
     $return .= mz_mbo_schedule_nav($mz_date);
@@ -54,9 +53,14 @@
           $spotsRemaining = $maxBooked - $totalBooked;
 
           $doNotLoad = array(
-            556, 557, 31,
-            22, 32, 34,
-            367, 366
+            532, 534, 535,
+            536, 537, 533,
+            534, 14, 17,
+            20, 24, 538,
+            27, 16, 21,
+            22, 18, 26,
+            412, 15, 25,
+            495, 440
           );
 
            ?>
@@ -77,14 +81,14 @@
   </table>
 </div>
 
-<?php elseif (!empty($mz_schedule_data['GetClassesResult']['Message'])) : ?>
+<?php elseif (!empty($enrollmentInfo['GetClassesResult']['Message'])) : ?>
 
-  <div><?php echo $mz_schedule_data['GetClassesResult']['Message']; ?></div>
+  <div><?php echo $enrollmentInfo['GetClassesResult']['Message']; ?></div>
 
 <?php else: ?>
 
 <?php __('Error getting classes. Try re-loading the page.'); ?><br>
-<pre><?php print_r($mz_schedule_data,1); ?></pre>
+<pre><?php print_r($enrollmentInfo,1); ?></pre>
 
 <?php endif?>
 <?php print_r($enrollmentData); ?>

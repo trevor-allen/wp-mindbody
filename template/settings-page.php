@@ -1,5 +1,5 @@
 <?php if(!mz_soap_check() || !mz_pear_check()): ?>
-	<div class="error">
+	<div class="error" style="width:99%; padding: 5px;">
 		<?php
 		global $mz_error;
 		echo $mz_error . 'MZ Mindbody API requires SOAP and PEAR. Please contact your hosting provider or enable via your CPANEL of php.ini file.'; ?>
@@ -9,7 +9,7 @@
 
 <?php if(mz_soap_check() && mz_pear_check()): ?>
 
-	<div style="width:99%; padding: 5px;">
+	<div class="updated" style="width:99%; padding: 5px;">
 		<?php esc_attr_e('Congratulations. Your server appears to be configured to integrate with mindbodyonline.'); ?>
 	</div>
 
