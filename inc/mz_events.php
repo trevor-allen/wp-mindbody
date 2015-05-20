@@ -1,7 +1,7 @@
 <?php
 function mZ_mindbody_show_events ()
 {
- 	require_once MZ_MINDBODY_SCHEDULE_DIR .'inc/mz_mbo_init.inc';
+ 	require_once MINDBODY_SCHEDULE_DIR .'inc/mz_mbo_init.inc';
 
  	// grab session type IDs for events
  	$mz_sessions = array($options['mz_mindbody_eventID']);

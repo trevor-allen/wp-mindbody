@@ -49,8 +49,8 @@ function mz_pear_check() {
 }
 
 //define plugin path and directory
-define( 'MZ_MINDBODY_SCHEDULE_DIR', plugin_dir_path( __FILE__ ) );
-define( 'MZ_MINDBODY_SCHEDULE_URL', plugin_dir_url( __FILE__ ) );
+define( 'MINDBODY_SCHEDULE_DIR', plugin_dir_path( __FILE__ ) );
+define( 'MINDBODY_SCHEDULE_URL', plugin_dir_url( __FILE__ ) );
 
 //register uninstall, activation and deactivation hooks
 register_activation_hook(__FILE__, 'mZ_mindbody_schedule_activation');

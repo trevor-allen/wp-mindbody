@@ -1,7 +1,7 @@
 <?php
 function mZ_mindbody_staff_listing()
 {
-  require_once MZ_MINDBODY_SCHEDULE_DIR .'inc/mz_mbo_init.inc';
+  require_once MINDBODY_SCHEDULE_DIR .'inc/mz_mbo_init.inc';
 
   $options = get_option( 'mz_mindbody_options','Option Not Set' );
   $mz_cache_reset = isset($options['mz_mindbody_clear_cache']) ? "on" : "off";
