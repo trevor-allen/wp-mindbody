@@ -24,32 +24,63 @@ function mZ_mindbody_staff_listing()
   usort($mz_staff_list, 'sortById');;
 
   $mz_empty_tags_pattern = "/<[^\/>]*>(\s|xC2xA0|&nbsp;)*<\/[^>]*>/";
+  $mb->debug();
 
-  foreach ($mz_staff_list as $staff_member)
-  {
-    if (!empty($staff_member['Bio']) && !empty($staff_member['ImageURL']))
-    {
+  $count = 0;
+
+  foreach ($mz_staff_list as $staff_member) {
+    if (!empty($staff_member['Bio']) && !empty($staff_member['ImageURL'])){
+
       $mz_staff_name = $staff_member['Name'];
       $mz_staff_bio = $staff_member['Bio'];
       $mz_staff_bio = str_replace($mz_empty_tags_pattern, '', $mz_staff_bio);
       $mz_staff_image = $staff_member['ImageURL'];
       $mz_staff_id = $staff_member['ID'];
 
-      $return .= '<div class="mz_mbo_staff_profile clearfix">';
-      $return .= '<div class="mz_mbo_staff_caption">';
-      $return .= '<h3>' . $mz_staff_name . '</h3>';
-      $return .= '</div>';
-      $return .= '<div class="mz_mbo_staff_bio">';
-      $return .= '<div class="mz_mbo_staff_photo">';
-      $return .= '<img src="' . $mz_staff_image . '" alt="">';
-      $return .= '<p class="mz_mbo_staff_schedule">';
-      $return .= '<a href="http://clients.mindbodyonline.com/ws.asp?studioid=' . $options['mz_mindbody_siteID'] . '&stype=-7&sView=week&sTrn=' . $mz_staff_id . '" class="btn btn-info">See ' . $mz_staff_name .'&apos;s Schedule</a>';
-      $return .= '</p>';
-      $return .= '</div>';
-      $return .= '</div>';
-      $return .= $mz_staff_bio;
-      $return .= '</div>';
-      $return .= '<hr/>';
+      $TTstaff = array(
+        'Stephanie Keach',
+        'Joe Taft',
+        'Kimberley Puryear',
+        'Shala Worsley',
+        'Michael Johnson',
+        'Libby Hinsley',
+        'Sierra Hollister',
+        'Ryan Conrad',
+        'JaneAnne Tager',
+        'Vishnu Dass',
+        'Rich Fabio',
+        'Ruth Jacobson'
+      );
+
+      if (in_array($mz_staff_name, $TTstaff)) {
+
+
+        if($count == 0) {
+          $return .= '<div class="row clearfix">';
+        }
+        $return .= '<div class="mz_mbo_staff_profile one_third tt-column clearfix">';
+        $return .= '<div class="mz_mbo_staff_caption">';
+        $return .= '<h3>' . $mz_staff_name . '</h3>';
+        $return .= '</div>';
+        $return .= '<div class="mz_mbo_staff_bio">';
+        $return .= '<div class="mz_mbo_staff_photo">';
+        $return .= '<img src="' . $mz_staff_image . '" alt="">';
+        $return .= '<p class="mz_mbo_staff_schedule">';
+        $return .= '<a href="http://clients.mindbodyonline.com/ws.asp?studioid=' . $options['mz_mindbody_siteID'] . '&stype=-7&sView=week&sTrn=' . $mz_staff_id . '" class="btn btn-info">See ' . $mz_staff_name .'&apos;s Schedule</a>';
+        $return .= '</p>';
+        $return .= '</div>';
+        $return .= '</div>';
+        $return .= $mz_staff_bio;
+        $return .= '</div>';
+        // $return .= '<hr/>';
+        if($count == 2) {
+          $return .= '</div>';
+        }
+        $count++;
+        if($count == 3) {
+          $count = 0;
+        }
+      }
     }
   }
   return $return;

@@ -2,6 +2,12 @@
 We want to do as little as possible here so CSS can be defined in theme.
 */
 
+.clearfix:after {
+  display: table;
+  content: '';
+  clear: both;
+}
+
 .mbo-table {
   font-size: 1em;
   max-width: 100%;
