@@ -66,7 +66,7 @@
             <td><?php echo esc_html($trimmed); if ($isAvailable) : ?><br><a class="btn" href="<?php echo esc_url($linkURL); ?>" target="_blank"><?php __('Sign-Up'); ?></a><?php endif ?></td>
             <td><a data-toggle="modal" data-target="#mzModal" href="#"><?php echo esc_html($className); ?></a></td>
             <td><?php echo esc_html($staffName); ?></td>
-            <td><?php echo esc_html($sessionLoc); ?><?php echo esc_html($spotsRemaining); ?></td>
+            <td><?php echo esc_html($sessionLoc); ?></td>
           </tr>
         <?php endif; ?>
 
