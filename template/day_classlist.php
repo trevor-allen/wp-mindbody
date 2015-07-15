@@ -62,8 +62,9 @@ if(!empty($mz_schedule_data['GetClassesResult']['Classes']['Class'])) {
                         $theClassDate = date("y-m-d", strtotime($class['StartDateTime']));
                         $today = date("y-m-d", strtotime("today"));
                         
-                        $start = strtotime($sDate);
-                        $now = time();
+                        //$start = strtotime($sDate);
+                        $start = date("H", strtotime($class['StartDateTime']));
+                        $now = date("H", time());
                         
                         if(!in_array($sessionID, $doNotLoad)) {
                             if($theClassDate === $today) {
