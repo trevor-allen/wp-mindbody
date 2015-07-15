@@ -1,7 +1,7 @@
 <?php
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-if(!empty($mz_schedule_data['GetClassesResult']['Classes']['Class'])):
+if(!empty($mz_schedule_data['GetClassesResult']['Classes']['Class'])) {
 
     $mb->debug();
     
@@ -13,8 +13,8 @@ if(!empty($mz_schedule_data['GetClassesResult']['Classes']['Class'])):
     $output .= "<div id='mbo-schedule' class='mbo-schedule'>";
         $output .= "<ul id='mbo-list' class='mbo-list'>";
 
-            foreach($mz_days as $classDate => $mz_classes):
-                foreach($mz_classes as $class):
+            foreach($mz_days as $classDate => $mz_classes) {
+                foreach($mz_classes as $class) {
                     if(!$class['IsCanceled']) {
 
                         $sDate = date_i18n('m/d/Y', strtotime($class['StartDateTime']));
