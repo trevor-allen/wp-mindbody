@@ -10,32 +10,37 @@ We want to do as little as possible here so CSS can be defined in theme.
 
 
 
-.mbo-list {
+#mbo-schedule .mbo-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.mbo-list-item {
+#mbo-schedule .mbo-list-item {
   padding: 1em 0;
+  margin: 0;
   border-bottom: 1px solid #ddd;
 }
 
-.mbo-list-item > div {
+#mbo-schedule .mbo-list-item > div {
   width: 50%;
   float: left;
 }
 
-.mbo-list-item > p {
+#mbo-schedule .mbo-list-item .staffmember {
+  margin-bottom: 0;
+}
+
+#mbo-schedule .mbo-list-item > p {
   float: right;
 }
 
-.mbo-list-item h1,
-.mbo-list-item h2,
-.mbo-list-item h3,
-.mbo-list-item h4,
-.mbo-list-item h5,
-.mbo-list-item h6 {
+#mbo-schedule .mbo-list-item h1,
+#mbo-schedule .mbo-list-item h2,
+#mbo-schedule .mbo-list-item h3,
+#mbo-schedule .mbo-list-item h4,
+#mbo-schedule .mbo-list-item h5,
+#mbo-schedule .mbo-list-item h6 {
   margin-top: 0;
 }
 

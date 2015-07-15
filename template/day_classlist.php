@@ -61,8 +61,8 @@ if(!empty($mz_schedule_data['GetClassesResult']['Classes']['Class'])):
 
                                 $output .= "<li class='clearfix mbo-list-item'>";
                                     $output .= "<div>";
-                                        $output .= "<h4><a href='{$escURL}' target='_blank'>{$escClassName}</a></h4>";
-                                        $output .= "<h6>{$escStaffName}</h6>";
+                                        $output .= "<h3 class='classtitle'><a href='{$escURL}' target='_blank'>{$escClassName}</a></h3>";
+                                        $output .= "<h5 class='staffmember'>{$escStaffName}</h5>";
                                     $output.= "</div>";
                                     $output .= "<p>{$trimmed}</p>";
                                 $output .= "</li>";
