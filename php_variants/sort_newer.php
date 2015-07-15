@@ -3,7 +3,7 @@ function sortClassesByDate($mz_classes = array()) {
 	$mz_classesByDate = array();
 	foreach($mz_classes as $class)
 	{
-		$classDate = date("Y-m-d", strtotime($class['StartDateTime']));
+		$classDate = date("Y-m-d-H", strtotime($class['StartDateTime']));
 		if(!empty($mz_classesByDate[$classDate])) {
 			$mz_classesByDate[$classDate] = array_merge($mz_classesByDate[$classDate], array($class));
 		} else {
