@@ -27,18 +27,19 @@ We want to do as little as possible here so CSS can be defined in theme.
   float: left;
 }
 
-#mbo-schedule .mbo-list-item .classtitle {
+#mbo-schedule .mbo-list-item .class-title {
   margin-bottom: .5em;
   line-height: 1.2;
 }
 
-#mbo-schedule .mbo-list-item .staffmember {
+#mbo-schedule .mbo-list-item .class-teacher {
   margin-bottom: 0;
   line-height: 1.2;
 }
 
-#mbo-schedule .mbo-list-item > p {
+#mbo-schedule .mbo-list-item > .class-time {
   float: right;
+  text-align: right;
 }
 
 #mbo-schedule .mbo-list-item h1,
