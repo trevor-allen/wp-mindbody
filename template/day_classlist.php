@@ -58,9 +58,11 @@ if(!empty($mz_schedule_data['GetClassesResult']['Classes']['Class'])):
                             367,
                             366
                         );
-
-                        $today = date("Y-m-d H:i:s");
-                        if ($classStart > $today) {
+                        
+                        $start = strtotime($startDateTime)
+                        $now = time();
+                        
+                        if ($start > $now) {
                             if(!in_array($sessionID, $doNotLoad)){
                                 if($count < 5) {
 
