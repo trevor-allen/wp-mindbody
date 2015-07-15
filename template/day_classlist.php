@@ -49,14 +49,14 @@ if(!empty($mz_schedule_data['GetClassesResult']['Classes']['Class'])) {
                         $spotsRemaining = $maxBooked - $totalBooked;
 
                         $doNotLoad = array(
-                            556,
-                            557,
-                            31,
-                            22,
-                            32,
-                            34,
-                            367,
-                            366
+                            //556,
+                            //557,
+                            //31,
+                            //22,
+                            //32,
+                            //34,
+                            //367,
+                            //366
                         );
                         
                         $start = strtotime($classStart);
