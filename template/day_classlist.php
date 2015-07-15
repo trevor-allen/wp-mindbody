@@ -61,9 +61,8 @@ if(!empty($mz_schedule_data['GetClassesResult']['Classes']['Class'])):
 
                         $today = date("Y-m-d H:i:s");
                         if ($startDateTime > $today) {
-
-                        if(!in_array($sessionID, $doNotLoad)){
-                            if($count < 5) {
+                            if(!in_array($sessionID, $doNotLoad)){
+                                if($count < 5) {
 
                                 $output .= "<li class='clearfix mbo-list-item'>";
                                     $output .= "<div>";
@@ -75,8 +74,9 @@ if(!empty($mz_schedule_data['GetClassesResult']['Classes']['Class'])):
 
                                 $count ++;
 
+                                }
                             }
-                        }
+                        }    
                     }
                 }
             }
