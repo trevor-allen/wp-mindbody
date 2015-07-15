@@ -20,6 +20,11 @@ We want to do as little as possible here so CSS can be defined in theme.
   padding: .8em 0;
   margin: 0;
   border-bottom: 1px solid #ddd;
+  transition: background .25s ease-in-out;
+}
+
+#mbo-schedule .mbo-list-item:hover {
+  background: rgba(0,0,0,.02);
 }
 
 #mbo-schedule .mbo-list-item > div {
