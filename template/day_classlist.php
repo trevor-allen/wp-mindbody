@@ -59,12 +59,12 @@ if(!empty($mz_schedule_data['GetClassesResult']['Classes']['Class'])):
                         if(!in_array($sessionID, $doNotLoad)):
                             if($count < 5):
 
-                                $output .= "<li class='clearfix' style='border-bottom: 1px solid gray;'>";
-                                    $output .= "<div style='width: 70%; float: left;'>";
+                                $output .= "<li class='clearfix mbo-list-item'>";
+                                    $output .= "<div>";
                                         $output .= "<h4><a href='{$escURL}' target='_blank'>{$escClassName}</a></h4>";
                                         $output .= "<h6>{$escStaffName}</h6>";
                                     $output.= "</div>";
-                                    $output .= "<p style='float: right'>{$trimmed}</p>";
+                                    $output .= "<p>{$trimmed}</p>";
                                 $output .= "</li>";
 
                                 $count ++;

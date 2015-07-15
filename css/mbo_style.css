@@ -8,6 +8,39 @@ We want to do as little as possible here so CSS can be defined in theme.
   clear: both;
 }
 
+
+
+.mbo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mbo-list-item {
+  padding: 1em 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.mbo-list-item > div {
+  width: 50%;
+  float: left;
+}
+
+.mbo-list-item > p {
+  float: right;
+}
+
+.mbo-list-item h1,
+.mbo-list-item h2,
+.mbo-list-item h3,
+.mbo-list-item h4,
+.mbo-list-item h5,
+.mbo-list-item h6 {
+  margin-top: 0;
+}
+
+
+
 .mbo-table {
   font-size: 1em;
   max-width: 100%;
