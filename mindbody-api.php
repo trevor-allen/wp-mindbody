@@ -192,85 +192,15 @@ function mz_mindbody_debug_text() {
 }
 add_action( 'admin_init', 'mz_mindbody_debug_text' );
 
-
-
-// Display and fill the form field
-// function mz_mindbody_source_name() {
-// 	// get option 'mz_source_name' value from the database
-// 	$options = get_option( 'mz_mindbody_options',__('Option Not Set') );
-// 	$mz_source_name = (isset($options['mz_source_name'])) ? $options['mz_source_name'] : _e('YOUR SOURCE NAME');
-//
-// }
-//
-// // Display and fill the form field
-// function mz_mindbody_password() {
-// 	$options = get_option( 'mz_mindbody_options',__('Option Not Set') );
-// 	$mz_mindbody_password = (isset($options['mz_mindbody_password'])) ? $options['mz_mindbody_password'] : _e('YOUR MINDBODY PASSWORD');
-//
-// }
-//
-// // Display and fill the form field
-// function mz_mindbody_siteID() {
-// 	// get option 'text_string' value from the database
-// 	$options = get_option( 'mz_mindbody_options',__('Option Not Set') );
-// 	$mz_mindbody_siteID = (isset($options['mz_mindbody_siteID'])) ? $options['mz_mindbody_siteID'] : _e('YOUR SITE ID');
-//
-// }
-//
-// // Display and fill the form field
-// function mz_mindbody_eventID() {
-// 	// get option 'text_string' value from the database
-// 	$options = get_option( 'mz_mindbody_options',__('Option Not Set') );
-// 	$mz_mindbody_eventID = (isset($options['mz_mindbody_eventID'])) ? $options['mz_mindbody_eventID'] : _e('Event Category IDs');
-//
-// }
-
-// Display and fill the form field
-// function mz_mindbody_clear_cache() {
-// 	$options = get_option( 'mz_mindbody_options','Option Not Set' );
-// 	printf(
-// 	'<input id="%1$s" name="mz_mindbody_options[%1$s]" type="checkbox" %2$s />',
-// 	'mz_mindbody_clear_cache',
-// 	checked( isset($options['mz_mindbody_clear_cache']) , true, false )
-// );
-// }
-
-// Validate user input (we want text only)
-// function mz_mindbody_validate_options( $input ) {
-// 	foreach ($input as $key => $value) {
-// 		$valid[$key] = wp_strip_all_tags(preg_replace( '/\s/', '', $input[$key] ));
-// 		if($valid[$key] != $input[$key]) {
-// 			add_settings_error(
-// 				'mz_mindbody_text_string',
-// 				'mz_mindbody_texterror',
-// 				'Does not appear to be valid ',
-// 				'error'
-// 			);
-// 		}
-// 	}
-// 	return $valid;
-// }
-//
-// }
-// else
-// {// non-admin enqueues, actions, and filters
-//
 if(!is_admin()) {
-
 
 	add_action('init', 'myStartSession', 1);
 	add_action('wp_logout', 'myEndSession');
 	add_action('wp_login', 'myEndSession');
 
 	function myStartSession() {
-		if (phpversion() >= 5.4) {
-			if (session_status() == PHP_SESSION_NONE) {
-				session_start();
-			}
-		} else{
-			if(!session_id()) {
-				session_start();
-			}
+		if (session_status() == PHP_SESSION_NONE) {
+			session_start();
 		}
 	}
 
@@ -307,11 +237,7 @@ if(!is_admin()) {
 
 }//EOF Not Admin
 
-if (phpversion() >= 5.3) {
 	include_once('php_variants/sort_newer.php');
-} else {
-	include_once('php_variants/sort_older.php');
-}
 
 function mz_getDateRange($date, $duration=7) {
 	/*Gets a YYYY-mm-dd date and returns an array of four dates:
