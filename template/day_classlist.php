@@ -64,7 +64,7 @@ if(!empty($mz_schedule_data['GetClassesResult']['Classes']['Class'])):
                                         $output .= "<h3 class='classtitle'><a href='{$escURL}' target='_blank'>{$escClassName}</a></h3>";
                                         $output .= "<h5 class='staffmember'>{$escStaffName}</h5>";
                                     $output.= "</div>";
-                                    $output .= "<p>{$trimmed}</p>";
+                                    $output .= "<h6>{$trimmed}</h6>";
                                 $output .= "</li>";
 
                                 $count ++;
