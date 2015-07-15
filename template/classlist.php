@@ -2,8 +2,11 @@
 if( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 if(!empty($mz_schedule_data['GetClassesResult']['Classes']['Class'])):
 
+    $mb->debug();
+
     $mz_days = $mb->makeNumericArray($mz_schedule_data['GetClassesResult']['Classes']['Class']);
     $mz_days = sortClassesByDate($mz_days);
+    $output = '';
 
     $output .= "<div id='mbo-schedule' class='mbo-schedule'>";
     $output .= "<table class='mbo-table table-striped'>";
