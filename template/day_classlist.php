@@ -59,26 +59,27 @@ if(!empty($mz_schedule_data['GetClassesResult']['Classes']['Class'])) {
                             //366
                         );
                         
-                        $date = date("y-m-d", strtotime($class['StartDateTime']));
+                        $theClassDate = date("y-m-d", strtotime($class['StartDateTime']));
                         $today = date("y-m-d", strtotime("today"));
                         
                         $start = strtotime($sDate);
                         $now = time();
                         
                         if(!in_array($sessionID, $doNotLoad)) {
-                            if($count < $day) {
-                                 if ($start >= $now) {
-                                    if($date === $today) {
+                            if($theClassDate === $today) {
+                                if($count < $day) {
+                                    if ($start >= $now) {
 
-                                $output .= "<li class='clearfix mbo-list-item'>";
-                                    $output .= "<div>";
-                                        $output .= "<h3 class='class-title'><a href='{$escURL}' target='_blank'>{$escClassName}</a></h3>";
-                                        $output .= "<h5 class='class-teacher'>{$escStaffName}</h5>";
-                                    $output.= "</div>";
-                                    $output .= "<h6 class='class-time'>{$trimmed}</h6>";
-                                $output .= "</li>";
-
-                                $count ++;
+                                        $output .= "<li class='clearfix mbo-list-item'>";
+                                            $output .= "<div>";
+                                                $output .= "<h3 class='class-title'><a href='{$escURL}' target='_blank'>{$escClassName}</a></h3>";
+                                                $output .= "<h5 class='class-teacher'>{$escStaffName}</h5>";
+                                            $output.= "</div>";
+                                            $output .= "<h6 class='class-time'>{$trimmed}</h6>";
+                                        $output .= "</li>";
+        
+                                        $count ++;
+                                
                                     }
                                 }
                             }
