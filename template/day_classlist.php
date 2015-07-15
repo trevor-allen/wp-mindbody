@@ -59,7 +59,7 @@ if(!empty($mz_schedule_data['GetClassesResult']['Classes']['Class'])) {
                             366
                         );
                         
-                        $start = strtotime($class['StartDateTime']);
+                        $start = strtotime($classStart);
                         $now = time();
                         
                         if(!in_array($sessionID, $doNotLoad)) {
