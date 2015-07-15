@@ -59,12 +59,16 @@ if(!empty($mz_schedule_data['GetClassesResult']['Classes']['Class'])) {
                             //366
                         );
                         
+                        $date = date("y-m-d", strtotime($class['StartDateTime']));
+                        $today = date("y-m-d", strtotime("today"));
+                        
                         $start = strtotime($sDate);
                         $now = time();
                         
                         if(!in_array($sessionID, $doNotLoad)) {
                             if($count < $day) {
                                  if ($start >= $now) {
+                                    if($date === $today) {
 
                                 $output .= "<li class='clearfix mbo-list-item'>";
                                     $output .= "<div>";
@@ -75,7 +79,7 @@ if(!empty($mz_schedule_data['GetClassesResult']['Classes']['Class'])) {
                                 $output .= "</li>";
 
                                 $count ++;
-
+                                    }
                                 }
                             }
                         }    
