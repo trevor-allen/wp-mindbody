@@ -17,7 +17,7 @@ We want to do as little as possible here so CSS can be defined in theme.
 }
 
 #mbo-schedule .mbo-list-item {
-  padding: 1em 0;
+  padding: .8em 0;
   margin: 0;
   border-bottom: 1px solid #ddd;
 }
@@ -27,8 +27,14 @@ We want to do as little as possible here so CSS can be defined in theme.
   float: left;
 }
 
+#mbo-schedule .mbo-list-item .classtitle {
+  margin-bottom: .5em;
+  line-height: 1.2;
+}
+
 #mbo-schedule .mbo-list-item .staffmember {
   margin-bottom: 0;
+  line-height: 1.2;
 }
 
 #mbo-schedule .mbo-list-item > p {
