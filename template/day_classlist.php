@@ -86,13 +86,13 @@ if(!empty($mz_schedule_data['GetClassesResult']['Classes']['Class'])) {
         $output .= "</ul>";
     $output .= "</div>";
 
-    elseif (!empty($mz_schedule_data['GetClassesResult']['Message'])) {
+} elseif (!empty($mz_schedule_data['GetClassesResult']['Message'])) {
 
         $output = "<div>";
         $output .= $mz_schedule_data['GetClassesResult']['Message'];
         $output .= "</div>";
 
-    } else {
+} else {
 
         $output = __('Error getting classes. Try re-loading the page.');
         $output .= "<br/>";
