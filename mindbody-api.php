@@ -171,8 +171,8 @@ function mz_mindbody_settings_page() {
 	$options = get_option( 'mz_mindbody_options' );
 
 	if( $options != '' ) {
-		$mz_source_name 			= $options['mz_source_name'];
-		$mz_mindbody_password = $options['mz_mindbody_password'];
+		$mz_source_name 		= $options['mz_source_name'];
+		$mz_mindbody_password 	= $options['mz_mindbody_password'];
 		$mz_mindbody_siteID 	= $options['mz_mindbody_siteID'];
 		$mz_mindbody_eventID 	= $options['mz_mindbody_eventID'];
 	}
