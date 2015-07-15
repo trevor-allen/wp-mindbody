@@ -15,7 +15,7 @@ if(!empty($mz_schedule_data['GetClassesResult']['Classes']['Class'])):
 
             foreach($mz_days as $classDate => $mz_classes):
                 foreach($mz_classes as $class):
-                    if (!$class['IsCanceled']):
+                    if(!$class['IsCanceled']) {
 
                         $sDate = date_i18n('m/d/Y', strtotime($class['StartDateTime']));
                         $sLoc = $class['Location']['ID'];
@@ -59,8 +59,11 @@ if(!empty($mz_schedule_data['GetClassesResult']['Classes']['Class'])):
                             366
                         );
 
-                        if(!in_array($sessionID, $doNotLoad)):
-                            if($count < 5):
+                        $today = date("Y-m-d H:i:s");
+                        if ($startDateTime > $today) {
+
+                        if(!in_array($sessionID, $doNotLoad)){
+                            if($count < 5) {
 
                                 $output .= "<li class='clearfix mbo-list-item'>";
                                     $output .= "<div>";
@@ -72,27 +75,27 @@ if(!empty($mz_schedule_data['GetClassesResult']['Classes']['Class'])):
 
                                 $count ++;
 
-                            endif;
-                        endif;
-                    endif;
-                endforeach;
-            endforeach;
+                            }
+                        }
+                    }
+                }
+            }
 
         $output .= "</ul>";
     $output .= "</div>";
 
-    elseif (!empty($mz_schedule_data['GetClassesResult']['Message'])):
+    elseif (!empty($mz_schedule_data['GetClassesResult']['Message'])) {
 
         $output = "<div>";
         $output .= $mz_schedule_data['GetClassesResult']['Message'];
         $output .= "</div>";
 
-    else:
+    } else {
 
         $output = __('Error getting classes. Try re-loading the page.');
         $output .= "<br/>";
         $output .= "<pre>";
         //$output .= print_r($mz_schedule_data,1);
         $output .= "</pre>";
-
-endif;
+        
+}
