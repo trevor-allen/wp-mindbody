@@ -8,9 +8,102 @@ We want to do as little as possible here so CSS can be defined in theme.
   clear: both;
 }
 
+.mbo-table {
+  margin: 1em 0;
+  font-size: 16px;
+  /* min-width: 300px; */
+}
+.mbo-table th {
+  display: none;
+  border-top: 1px solid #dfdfdf;
+  border-bottom: 1px solid #dfdfdf;
+}
+.mbo-table tr {
+  background: white;
+  display: block;
+  border-radius: 3px;
+  margin-bottom: 1.5em;
+  transition: background .3s ease-in-out;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,.12);
+}
+.mbo-table tr:hover {
+  background: #fefefe;
+}
+.mbo-table td {
+  display: block;
+}
 
+.mbo-table th,
+.mbo-table td {
+  text-align: left;
+}
+.mbo-table td:first-child {
+  padding-top: .5em;
+}
+.mbo-table td:last-child {
+  padding-bottom: .5em;
+}
+.mbo-table td:before {
+  content: attr(data-th) ": ";
+  font-weight: bold;
+  width: 6.5em;
+  display: inline-block;
+}
+@media (min-width: 480px) {
+  .mbo-table {
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.12);
+  }
+  .mbo-table tr {
+    display: table-row;
+  }
+  .mbo-table td:before {
+    display: none;
+  }
+}
+@media (min-width: 480px) {
+  .mbo-table th,
+  .mbo-table td {
+    display: table-cell;
+    padding: .25em .5em;
+  }
+  .mbo-table th:first-child,
+  .mbo-table td:first-child {
+    padding-left: 0;
+  }
+  .mbo-table th:last-child,
+  .mbo-table td:last-child {
+    padding-right: 0;
+  }
+}
 
-#mbo-schedule .mbo-list {
+.mbo-table {
+  color: #555;
+  overflow: hidden;
+}
+.mbo-table tr {
+  border-color: #ddd;
+}
+.mbo-table th,
+.mbo-table td {
+  margin: .5em 1em;
+}
+@media (min-width: 480px) {
+  .mbo-table th,
+  .mbo-table td {
+    padding: 1em !important;
+  }
+}
+.mbo-table th,
+.mbo-table td:before {
+  color: #333;
+}
+
+.mbo-table td a {
+  color: #555;
+  text-decoration: none;
+}
+
+/* #mbo-schedule .mbo-list {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -98,4 +191,4 @@ We want to do as little as possible here so CSS can be defined in theme.
 
 .mbo-table tr:nth-child(2n+1) {
   background-color: rgba(33, 71, 90, 0.02);
-}
+} */

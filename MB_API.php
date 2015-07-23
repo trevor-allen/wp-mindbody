@@ -3,14 +3,18 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 class MB_API {
+
 	protected $client;
 
 	//Uncomment if you need user credentials
-	protected $userCredentials = array(
-	"Username"=>'trevoristall',
-	"Password"=>'kath4leyb0',
-	"SiteIDs"=>array('16668')
-	);
+	// protected $userCredentials = array(
+	// "Username"=>options['MBO_username'],
+	// "Password"=>$MBO_password,
+	// "SiteIDs"=>array($mz_mindbody_siteID)
+	// //'trevoristall',
+	// //'kath4leyb0',
+	// //array('16668')
+	// );
 
 	protected $appointmentServiceWSDL = "https://api.mindbodyonline.com/0_5/AppointmentService.asmx?WSDL";
 	protected $classServiceWSDL = "https://api.mindbodyonline.com/0_5/ClassService.asmx?WSDL";
@@ -30,6 +34,7 @@ class MB_API {
 	/*
 	** initializes the apiServices and apiMethods arrays
 	*/
+
 	public function __construct($sourceCredentials = array()) {
 		// set apiServices array with Mindbody WSDL locations
 		$this->apiServices = array(
@@ -43,11 +48,7 @@ class MB_API {
 			'StaffService' => $this->staffServiceWSDL
 		);
 		// set apiMethods array with available methods from Mindbody services
-		if (phpversion() >= 5.3) {
       include_once('php_variants/construct_newer.php');
-    } else {
-      include_once('php_variants/construct_older.php');
-    }
 
 		// set sourceCredentials
 		if(!empty($sourceCredentials)) {
@@ -63,6 +64,12 @@ class MB_API {
 				} else if(is_numeric($sourceCredentials['SiteIDs'])) {
 					$this->sourceCredentials['SiteIDs'] = array($sourceCredentials['SiteIDs']);
 				}
+			}
+			if(!empty($sourceCredentials['MBO_username'])) {
+				$this->sourceCredentials['MBO_username'] = $sourceCredentials['MBO_username'];
+			}
+			if(!empty($sourceCredentials['MBO_password'])) {
+				$this->sourceCredentials['MBO_password'] = $sourceCredentials['MBO_password'];
 			}
 		}
 	}

@@ -30,20 +30,16 @@ function mz_soap_check() {
 		$mz_error .= 'SOAP not installed! ';
 		return false;
 	}
-
 	return true;
-
 }
 
 function mz_pear_check() {
 
 	global $mz_error;
-
 	if (!class_exists('System')) {
 		$mz_error .= 'PEAR not installed! ';
 		return false;
 	}
-
 	return true;
 
 }
@@ -120,22 +116,22 @@ class mZ_Mindbody_day_schedule extends WP_Widget {
 		echo(mZ_mindbody_show_schedule($arguments));
 		echo $after_widget;
 	}
-
 }
 
-function mz_mindbody_settings_menu() {
-	//create submenu under Settings
-	add_options_page(
-		'Mindbody Settings',
+function MBO_settings_menu() {
+	add_menu_page(
+		'Mindbody',
 		'Mindbody',
 		'manage_options',
 		__FILE__,
-		'mz_mindbody_settings_page'
+		'MBO_settings_page',
+		'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAAbwAAAG8B8aLcQwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAEDSURBVDiNzdKhTgNBEMbx37S4w5BUQppgeqoGS8Dei9TX8BQYPC/SGoLA4oumshJVwSKYS5ZwDSFBMMkkX77/7OzMZpVS9Il77LHGuPLH6e1x/+VMVXSGgjlecVWxq/TmWXPWs8AJbjHDZSklImKDN+x8xgTHpZQ2Igqe8IIbWGTXgpI3bmovc5Os9hYjNKqIiEec+x7nyepojlLs8Jy6xUM1es97tk590XdZYlU92F2lO3QH2ArL0cCov4p+hTYi7lJfV3oKEdENsDan+CcrTKoxp5W+yBUMsAn82QS7Usoqb+sqDQ6wZd/gHU1EtNnspNKnWTzEmjxrhq3vf/+n3GL2ATOnuEIsGis6AAAAAElFTkSuQmCCfbada4cf12d017b26a08387c270eeead',
+		'2.001'
 	);
 }
-add_action ('admin_menu', 'mz_mindbody_settings_menu');
+add_action ('admin_menu', 'MBO_settings_menu');
 
-function mz_mindbody_settings_page() {
+function MBO_settings_page() {
 
 	if(!current_user_can('manage_options')) {
 		wp_die( 'You do not have sufficient permissions to access this page.' );
@@ -150,22 +146,24 @@ function mz_mindbody_settings_page() {
 
 		if( $hidden_field == 'Y' ) {
 
-			$mz_source_name = esc_html( $_POST['mz_source_name'] );
-			$mz_mindbody_password = esc_html( $_POST['mz_mindbody_password'] );
-			$mz_mindbody_siteID = esc_html( $_POST['mz_mindbody_siteID']);
-			$mz_mindbody_eventID = esc_html( $_POST['mz_mindbody_eventID']);
+			$mz_source_name 		= esc_html( $_POST['mz_source_name'] );
+			$mz_mindbody_password 	= esc_html( $_POST['mz_mindbody_password'] );
+			$mz_mindbody_siteID 	= esc_html( $_POST['mz_mindbody_siteID'] );
+			$mz_mindbody_eventID 	= esc_html( $_POST['mz_mindbody_eventID'] );
+			$MBO_username 			= esc_html( $_POST['MBO-username'] );
+			$MBO_password 			= esc_html( $_POST['MBO-password'] );
 
-
-			$options['mz_source_name'] 				= $mz_source_name;
-			$options['mz_mindbody_password']  = $mz_mindbody_password;
+			$options['mz_source_name'] 			= $mz_source_name;
+			$options['mz_mindbody_password']  	= $mz_mindbody_password;
 			$options['mz_mindbody_siteID']		= $mz_mindbody_siteID;
 			$options['mz_mindbody_eventID']		= $mz_mindbody_eventID;
-			$options['last_updated']					= time();
+			$options['MBO_username']			= $MBO_username;
+			$options['MBO_password']			= $MBO_password;
+			$options['last_updated']			= time();
 
 			update_option( 'mz_mindbody_options', $options );
 
 		}
-
 	}
 
 	$options = get_option( 'mz_mindbody_options' );
@@ -175,22 +173,17 @@ function mz_mindbody_settings_page() {
 		$mz_mindbody_password 	= $options['mz_mindbody_password'];
 		$mz_mindbody_siteID 	= $options['mz_mindbody_siteID'];
 		$mz_mindbody_eventID 	= $options['mz_mindbody_eventID'];
+		$MBO_username 			= $options['MBO_username'];
+		$MBO_password  			= $options['MBO_password'];
 	}
 	require( 'template/settings-page.php' );
 }
 
 
 function mbo_admin_styles() {
-
 	wp_enqueue_style( 'mbo_main', plugins_url( 'mbo_style.css' ) );
-
 }
 add_action( 'admin_head', 'mbo_admin_styles' );
-
-function mz_mindbody_debug_text() {
-	//$mb->debug();
-}
-add_action( 'admin_init', 'mz_mindbody_debug_text' );
 
 if(!is_admin()) {
 
@@ -208,20 +201,12 @@ if(!is_admin()) {
 		session_destroy();
 	}
 
-	function mbo_styles_init() {
+	function MBO_styles() {
 		wp_enqueue_style( 'mbo_main', plugins_url( '/css/mbo_style.css', __FILE__ ) );
 	}
-	add_action( 'init','mbo_styles_init');
+	add_action( 'init','MBO_styles');
 
-	//add_action('init', 'enqueue_mz_mbo_scripts');
-	//function enqueue_mz_mbo_scripts() {
-		//wp_register_script( 'mz_mbo_bootstrap_script', plugins_url('/bootstrap/js/bootstrap.min.js', __FILE__), array( 'jquery' ),'3.1.1', true );
-		//wp_enqueue_script( 'mz_mbo_bootstrap_script' );
-		//wp_register_script( 'mz_mbo_modal_script', plugins_url('/js/mz_mbo_modal.js', __FILE__), array( 'jquery' ),'1', true );
-		//wp_enqueue_script( 'mz_mbo_modal_script' );
-	//}
-
-	include_once(dirname( __FILE__ ) . '/mindbody-php-api/MB_API.php');
+	include_once('MB_API.php');
 
 	foreach ( glob( plugin_dir_path( __FILE__ )."inc/*.php" ) as $file ) {
 		include_once $file;
@@ -237,7 +222,7 @@ if(!is_admin()) {
 
 }//EOF Not Admin
 
-	include_once('php_variants/sort_newer.php');
+include_once('php_variants/sort_newer.php');
 
 function mz_getDateRange($date, $duration=7) {
 	/*Gets a YYYY-mm-dd date and returns an array of four dates:
@@ -306,7 +291,6 @@ function mz_validate_date( $string ) {
 		return "mz_validate_weeknum error";
 	}
 }
-
 
 //Format arrays for display in development
 function mz_pr($data) {

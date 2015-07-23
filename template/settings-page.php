@@ -49,6 +49,13 @@
 
 											<p><strong><label for='mz_mindbody_eventID'><?php esc_attr_e('Event IDs: '); ?></label></strong><br>
 											<input id='mz_mindbody_eventID' name='mz_mindbody_eventID' class="regular-text" type='text' value='<?php if(isset($mz_mindbody_eventID) && $mz_mindbody_eventID != '') echo $mz_mindbody_eventID; ?>' /><span class="description"><?php esc_attr_e(' eg: 25, 17'); ?></span></p>
+												<hr/>
+												<p>Optional account credentials</p>
+											<p><strong><label for='username'><?php esc_attr_e('Username: '); ?></label></strong><br>
+											<input id='MBO-username' name='MBO-username' class="regular-text" type='text' value='<?php if(isset($MBO_username) && $MBO_username != '') echo $MBO_username; ?>' /><span class="description"><?php esc_attr_e('The account name for MBO'); ?></span></p>
+
+											<p><strong><label for='MBO-password'><?php esc_attr_e('Password: '); ?></label></strong><br>
+											<input id='MBO-password' name='MBO-password' class="regular-text" type='password' value='<?php if(isset($MBO_password) && $MBO_password != '') echo $MBO_password; ?>' /><span class="description"><?php esc_attr_e('THe account password for MBO'); ?></span></p>
 
 											<input class="button-primary" type="submit" name="submit" value="<?php esc_attr_e('Save Changes'); ?>" />
 										</form>

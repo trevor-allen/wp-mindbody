@@ -8,7 +8,10 @@ $options = get_option( 'mz_mindbody_options','Error: Mindbody Credentials Not Se
 $mb = new MB_API(array(
  'SourceName' => $options['mz_source_name'],
   'Password' => $options['mz_mindbody_password'],
-  'SiteIDs' => array($options['mz_mindbody_siteID'])
+  'SiteIDs' => array($options['mz_mindbody_siteID']),
+
+  'MBO_username' => array($options['MBO_username']),
+  'MBO_password' => array($options['MBO_password'])
 ));
 
 /* $mb->getXMLRequest();
