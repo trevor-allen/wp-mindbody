@@ -94,9 +94,9 @@ function listEnrollments() {
                $return .= '<tr><td>';
                $return .= '<div class="mz_mindbody_events_header clearfix">';
                $return .= '<div id="mz_mindbody_events_details">';
-               $return .= "<h3>$className</h3>";
+               $return .= "<h3>$className with <em>$staffName</em></h3>";
                $return .= '<a class="btn btn-success" href="' . $eventLinkURL . '">' . __('Sign-Up') . '</a>';
-               $return .= '<p class="mz_event_staff">with '. $staffName.'</p>';
+               $return .= '<p class="mz_event_staff">with '. $staffName . '</p>';
 
                $return .= '<h4 class="mz_event_staff">'.$day_and_date.', ' . date_i18n('g:i a', strtotime($startDateTime)).' - ';
                $return .= date_i18n('g:i a', strtotime($endDateTime)) . '</h4>';

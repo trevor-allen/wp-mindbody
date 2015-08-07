@@ -92,6 +92,11 @@ We want to do as little as possible here so CSS can be defined in theme.
   .mbo-table td {
     padding: 1em !important;
   }
+  .mbo-table tr {
+    box-shadow: none;
+}
+.mbo-table tr:nth-child(2n) {
+  background: RGBA(204, 102, 51, .2)
 }
 .mbo-table th,
 .mbo-table td:before {
