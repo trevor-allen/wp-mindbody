@@ -90,16 +90,18 @@ We want to do as little as possible here so CSS can be defined in theme.
 @media (min-width: 480px) {
   .mbo-table th {
     padding: 1em !important;
-    background: RGBA(0, 0, 0, .05);
+    font-weight: 700;
+    background: white;
   }
   .mbo-table td {
     padding: .5em !important;
   }
   .mbo-table tr {
     box-shadow: none;
+    background: RGBA(255, 196, 139, .1);
 }
 .mbo-table tr:nth-child(2n) {
-  background: RGBA(255, 196, 139, .5);
+  background: RGBA(255, 196, 139, .3);
 }
 .mbo-table th,
 .mbo-table td:before {
