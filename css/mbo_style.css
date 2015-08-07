@@ -88,15 +88,15 @@ We want to do as little as possible here so CSS can be defined in theme.
   margin: .5em 1em;
 }
 @media (min-width: 480px) {
-  .mbo-table th,
-  .mbo-table td {
+  .mbo-table th{
     padding: 1em !important;
+    background: RGBA(255, 196, 139, .5);
   }
   .mbo-table tr {
     box-shadow: none;
 }
 .mbo-table tr:nth-child(2n) {
-  background: RGBA(204, 102, 51, .2)
+  background: RGBA(0, 0, 0, .05);
 }
 .mbo-table th,
 .mbo-table td:before {
