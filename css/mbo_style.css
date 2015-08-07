@@ -81,7 +81,7 @@ We want to do as little as possible here so CSS can be defined in theme.
   overflow: hidden;
 }
 .mbo-table tr {
-  border-color: #ddd;
+  border: none;
 }
 .mbo-table th,
 .mbo-table td {
