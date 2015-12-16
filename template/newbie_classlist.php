@@ -2,7 +2,7 @@
 if( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 if(!empty($mz_schedule_data['GetClassesResult']['Classes']['Class'])) {
 
-    $mb->debug();
+   // $mb->debug();
 
     $mz_days = $mb->makeNumericArray($mz_schedule_data['GetClassesResult']['Classes']['Class']);
 
@@ -66,6 +66,7 @@ if(!empty($mz_schedule_data['GetClassesResult']['Classes']['Class'])) {
 
                 $loadFilter = array(
                     '*Gentle Flow',
+		    '*Gentle Flow $8',
                     '*Gentle Kundalini',
                     '*Gentle Restorative',
                     '*Gentle Slow Flow Restorative',
@@ -73,9 +74,16 @@ if(!empty($mz_schedule_data['GetClassesResult']['Classes']['Class'])) {
                     '*Gentle Align & Flow',
                     '*Gentle Flow & Restorative',
                     '*Gentle Restorative & Yin',
+		    '*Gentle Restorative & Yin $8',
                     '*Slow Flow',
+                    '*Slow Flow $8',
+                    'Slow Flow',
+		    '*Slow Flow & Restorative $8',
+		    '*Flow & Yin',
+		    'WARM Yin',
+		    '*WARM Yin $8',
+		    '*Gentle Flow & Restorative $8',
                     'Back to Basics 6 Week Series (NO DROP INS)',
-                    'Align & Flow',
                     '*Yin',
                     '*Align & Flow $8'
                 );
