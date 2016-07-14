@@ -1,7 +1,8 @@
 <?php
-if( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-if(!empty($mz_schedule_data['GetClassesResult']['Classes']['Class'])) {
-
+if (! defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly
+if (! empty($mz_schedule_data['GetClassesResult']['Classes']['Class'])) {
     $mb->debug();
 
     $mz_days = $mb->makeNumericArray($mz_schedule_data['GetClassesResult']['Classes']['Class']);
@@ -10,24 +11,23 @@ if(!empty($mz_schedule_data['GetClassesResult']['Classes']['Class'])) {
 
     $output = '';
 
-    if ($type=='week') {
+    if ($type == 'week') {
         $output .= mz_mbo_schedule_nav($mz_date);
     }
 
     $output .= "<div id='mbo-schedule' class='mbo-schedule'>";
     $output .= "<table class='mbo-table table-striped'>";
 
-    foreach($mz_days as $classDate => $mz_classes) {
+    foreach ($mz_days as $classDate => $mz_classes) {
         $output .= "<tr class='mbo-table-head clearfix'>";
-            $output .= "<th>" . esc_html(date_i18n($mz_date_display, strtotime($classDate))) . "</th>";
-            $output .= "<th>" . __('Name') . "</th>";
-            $output .= "<th>" . __('Instructor') . "</th>";
-            $output .= "<th>" . __('Location') . "</th>";
-        $output .= "</tr>";
+        $output .= '<th>'.esc_html(date_i18n($mz_date_display, strtotime($classDate))).'</th>';
+        $output .= '<th>'.__('Name').'</th>';
+        $output .= '<th>'.__('Instructor').'</th>';
+        $output .= '<th>'.__('Location').'</th>';
+        $output .= '</tr>';
 
-        foreach($mz_classes as $class) {
-            if(!$class['IsCanceled']) {
-
+        foreach ($mz_classes as $class) {
+            if (! $class['IsCanceled']) {
                 $sDate = date_i18n('m/d/Y', strtotime($class['StartDateTime']));
                 $sLoc = $class['Location']['ID'];
                 $sTG = $class['ClassDescription']['Program']['ID'];
@@ -57,48 +57,41 @@ if(!empty($mz_schedule_data['GetClassesResult']['Classes']['Class'])) {
 
                 $isAvailable = $class['IsAvailable'];
                 $classStart = date_i18n('g:i a', strtotime($startDateTime));
-                $classEnd =  date_i18n('g:i a', strtotime($endDateTime));
-                $trimmed = trim($classStart . ' – ' . $classEnd,"");
+                $classEnd = date_i18n('g:i a', strtotime($endDateTime));
+                $trimmed = trim($classStart.' – '.$classEnd, '');
 
                 $totalBooked = $class['TotalBooked'];
                 $maxBooked = $class['MaxCapacity'];
                 $spotsRemaining = $maxBooked - $totalBooked;
 
-                $doNotLoad = array(
+                $doNotLoad = [
                     // 556, 557, 31,
                     // 22, 32, 34,
                     // 367, 366
-                );
+                ];
 
-                if(!in_array($sessionID, $doNotLoad)) {
-
+                if (! in_array($sessionID, $doNotLoad)) {
                     $output .= "<tr class='clearfix'>";
-                    $output .= "<td data-th='" . esc_html(date_i18n($mz_date_display, strtotime($classDate))) . "'>" . esc_html($trimmed) . "</td>";
-                    $output .= "<td data-th='Name'><a href='" . esc_url($linkURL) . "'>" . esc_html($className) . "</a></td>";
-                    $output .= "<td data-th='Instructor'>" . esc_html($staffName) . "</td>";
+                    $output .= "<td data-th='".esc_html(date_i18n($mz_date_display, strtotime($classDate)))."'>".esc_html($trimmed).'</td>';
+                    $output .= "<td data-th='Name'><a href='".esc_url($linkURL)."'>".esc_html($className).'</a></td>';
+                    $output .= "<td data-th='Instructor'>".esc_html($staffName).'</td>';
                     $output .= "<td data-th='Location'>{$sessionLoc}</td>";
-                    $output .= "</tr>";
-
+                    $output .= '</tr>';
                 }
             }
         }
     }
 
-    $output .= "</table>";
-    $output .= "</div>";
-
-} elseif (!empty($mz_schedule_data['GetClassesResult']['Message'])) {
-
-    $output .= "<div>";
+    $output .= '</table>';
+    $output .= '</div>';
+} elseif (! empty($mz_schedule_data['GetClassesResult']['Message'])) {
+    $output .= '<div>';
     $output .= $mz_schedule_data['GetClassesResult']['Message'];
-    $output .= "</div>";
-
+    $output .= '</div>';
 } else {
-
     $output .= __('Error getting classes. Try re-loading the page.');
-    $output .= "<br/>";
-    $output .= "<pre>";
-    $output .= print_r($mz_schedule_data,1);
-    $output .= "</pre>";
-
+    $output .= '<br/>';
+    $output .= '<pre>';
+    $output .= print_r($mz_schedule_data, 1);
+    $output .= '</pre>';
 }
