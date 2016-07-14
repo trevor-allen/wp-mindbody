@@ -1,24 +1,26 @@
-<?php if ( ! defined( 'ABSPATH' ) )  exit; // Exit if accessed directly
+<?php if (! defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly
 
-function listEnrollments() {
-
-  require_once MINDBODY_SCHEDULE_DIR .'inc/mz_mbo_init.inc';
+function listEnrollments()
+{
+    require_once MINDBODY_SCHEDULE_DIR.'inc/mz_mbo_init.inc';
 
   // grab session type IDs for events
-  $mz_sessions = array(365, 557, 558, 560, 559);
+  $mz_sessions = [365, 557, 558, 560, 559];
 
-  $return = '';
+    $return = '';
 
-  $mz_date = empty($_GET['mz_date']) ? date_i18n('Y-m-d') : mz_validate_date($_GET['mz_date']);
+    $mz_date = empty($_GET['mz_date']) ? date_i18n('Y-m-d') : mz_validate_date($_GET['mz_date']);
 
   // only make API call if we have sessions set
-  if (!empty($mz_sessions) && ($mz_sessions[0] != 0)) {
-     $mz_timeframe = array_slice(mz_getDateRange($mz_date, 365), 0, 1);
+  if (! empty($mz_sessions) && ($mz_sessions[0] != 0)) {
+      $mz_timeframe = array_slice(mz_getDateRange($mz_date, 365), 0, 1);
 
      //While we still eed to support php 5.2 and can't use [0] on above
      $mz_timeframe = array_pop($mz_timeframe);
 
-     $mz_timeframe = array_merge($mz_timeframe, array('SessionTypeIDs'=>$mz_sessions));
+      $mz_timeframe = array_merge($mz_timeframe, ['SessionTypeIDs' => $mz_sessions]);
 
    // START caching configuration
   //  $mz_events_cache = "mz_events_cache";
@@ -41,105 +43,96 @@ function listEnrollments() {
    // keep this here
    $return .= $mb->debug();
 
-   $dnl = array('300hr YOUR YOGA Advanced Studies Registration Fee', '300hr YOUR YOGA Classics Track Registration Fee');
+      $dnl = ['300hr YOUR YOGA Advanced Studies Registration Fee', '300hr YOUR YOGA Classics Track Registration Fee'];
 
 
-   if(!empty($mz_event_data['GetClassesResult']['Classes']['Class'])) {
-     $number_of_events = count($mz_event_data['GetClassesResult']['Classes']['Class']);
+      if (! empty($mz_event_data['GetClassesResult']['Classes']['Class'])) {
+          $number_of_events = count($mz_event_data['GetClassesResult']['Classes']['Class']);
 
-     if ($number_of_events >= 1) {
-
-       $return .= '<p>' .$mz_event_calendar_duration .' '. __('Day Event Calendar');
-       $return .=  ' '. date_i18n($mz_date_display, strtotime($mz_timeframe['StartDateTime']));
-       $return .= ' - ';
-       $return .= date_i18n($mz_date_display, strtotime($mz_timeframe['EndDateTime'])).'</p>';
+          if ($number_of_events >= 1) {
+              $return .= '<p>'.$mz_event_calendar_duration.' '.__('Day Event Calendar');
+              $return .=  ' '.date_i18n($mz_date_display, strtotime($mz_timeframe['StartDateTime']));
+              $return .= ' - ';
+              $return .= date_i18n($mz_date_display, strtotime($mz_timeframe['EndDateTime'])).'</p>';
        //TODO Make this work - displaying number 20 with one event (correct on first page with 5 events).
        //$return .= ': ' . $number_of_events . ' '.__('event(s)').'</p>';
 
        $classes = $mb->makeNumericArray($mz_event_data['GetClassesResult']['Classes']['Class']);
-       $classes = sortClassesByDate($classes);
+              $classes = sortClassesByDate($classes);
 
-       $return .= mz_mbo_schedule_nav($mz_date, "Events", $mz_event_calendar_duration);
-       $return .= '<div class="mz_mindbody_events">';
-       $return .= '<table class="table mz_mindbody_events">';
+              $return .= mz_mbo_schedule_nav($mz_date, 'Events', $mz_event_calendar_duration);
+              $return .= '<div class="mz_mindbody_events">';
+              $return .= '<table class="table mz_mindbody_events">';
 
-       foreach($classes as $classDate => $classes) {
-         foreach($classes as $class) {
-           if (!$class['IsCanceled'] && !$class['HideCancel'] && $class['Active']) {
-
-             if (!in_array($class['ClassDescription']['Name'], $dnl)) {
-
-               $sDate = date_i18n('m/d/Y', strtotime($class['StartDateTime']));
-               $sLoc = $class['Location']['ID'];
-               $studioid = $class['Location']['SiteID'];
-               $sclassid = $class['ClassScheduleID'];
+              foreach ($classes as $classDate => $classes) {
+                  foreach ($classes as $class) {
+                      if (! $class['IsCanceled'] && ! $class['HideCancel'] && $class['Active']) {
+                          if (! in_array($class['ClassDescription']['Name'], $dnl)) {
+                              $sDate = date_i18n('m/d/Y', strtotime($class['StartDateTime']));
+                              $sLoc = $class['Location']['ID'];
+                              $studioid = $class['Location']['SiteID'];
+                              $sclassid = $class['ClassScheduleID'];
                // why is this hardcoded?
                $sType = -7;
-               if (empty($class['ClassDescription']['ImageURL'])) {
-                 $image = '';
-               } else {
-                 $image = '<img class="mz_mindbody_events_img" src="' .$class['ClassDescription']['ImageURL'] . '">';
-               }
-               $sTG = $class['ClassDescription']['Program']['ID'];
-               $eventLinkURL = "https://clients.mindbodyonline.com/ws.asp?sDate={$sDate}&amp;sLoc={$sLoc}&amp;sTG={$sTG}&amp;sType={$sType}&amp;sclassid={$sclassid}&amp;studioid={$studioid}";
-               $className = $class['ClassDescription']['Name'];
-               $startDateTime = date_i18n('Y-m-d H:i:s', strtotime($class['StartDateTime']));
-               $classDescription = $class['ClassDescription']['Description'];
-               $endDateTime = date_i18n('Y-m-d H:i:s', strtotime($class['EndDateTime']));
-               $staffName = $class['Staff']['Name'];
-               $ItemType = $class['ClassDescription']['Program']['Name'];
-               $enrolmentType = $class['ClassDescription']['Program']['ScheduleType'];
-               $day_and_date =  date_i18n("D F d", strtotime($classDate));
+                              if (empty($class['ClassDescription']['ImageURL'])) {
+                                  $image = '';
+                              } else {
+                                  $image = '<img class="mz_mindbody_events_img" src="'.$class['ClassDescription']['ImageURL'].'">';
+                              }
+                              $sTG = $class['ClassDescription']['Program']['ID'];
+                              $eventLinkURL = "https://clients.mindbodyonline.com/ws.asp?sDate={$sDate}&amp;sLoc={$sLoc}&amp;sTG={$sTG}&amp;sType={$sType}&amp;sclassid={$sclassid}&amp;studioid={$studioid}";
+                              $className = $class['ClassDescription']['Name'];
+                              $startDateTime = date_i18n('Y-m-d H:i:s', strtotime($class['StartDateTime']));
+                              $classDescription = $class['ClassDescription']['Description'];
+                              $endDateTime = date_i18n('Y-m-d H:i:s', strtotime($class['EndDateTime']));
+                              $staffName = $class['Staff']['Name'];
+                              $ItemType = $class['ClassDescription']['Program']['Name'];
+                              $enrolmentType = $class['ClassDescription']['Program']['ScheduleType'];
+                              $day_and_date = date_i18n('D F d', strtotime($classDate));
 
-               $return .= '<tr><td>';
-               $return .= '<div class="mz_mindbody_events_header clearfix">';
-               $return .= '<div id="mz_mindbody_events_details">';
-               $return .= "<h3>$className with <em>$staffName</em></h3>";
-               $return .= '<a class="btn btn-success" href="' . $eventLinkURL . '">' . __('Sign-Up') . '</a>';
-               $return .= '<p class="mz_event_staff">with '. $staffName . '</p>';
+                              $return .= '<tr><td>';
+                              $return .= '<div class="mz_mindbody_events_header clearfix">';
+                              $return .= '<div id="mz_mindbody_events_details">';
+                              $return .= "<h3>$className with <em>$staffName</em></h3>";
+                              $return .= '<a class="btn btn-success" href="'.$eventLinkURL.'">'.__('Sign-Up').'</a>';
+                              $return .= '<p class="mz_event_staff">with '.$staffName.'</p>';
 
-               $return .= '<h4 class="mz_event_staff">'.$day_and_date.', ' . date_i18n('g:i a', strtotime($startDateTime)).' - ';
-               $return .= date_i18n('g:i a', strtotime($endDateTime)) . '</h4>';
+                              $return .= '<h4 class="mz_event_staff">'.$day_and_date.', '.date_i18n('g:i a', strtotime($startDateTime)).' - ';
+                              $return .= date_i18n('g:i a', strtotime($endDateTime)).'</h4>';
 
-               $return .= '</div>';
+                              $return .= '</div>';
 
-               $return .= '</div>';
+                              $return .= '</div>';
 
-               $return .= '<div class="mz_mindbody_event_description">';
-               $return .=  $image;
-               $return .= "<p>$classDescription</p>";
-               $return .= "</div>";
-               $return .= '</td></tr>';
-             }
-           }
-         }
-       }
-       $return .=	'</table></div>';
-     } else {
-       $return .= '<h3>' . __('No events published this period.'). '</h3>';
-     }
-   } else {
-
-     if(!empty($mz_event_data['GetClassesResult']['Message'])) {
-       $return .= $mz_event_data['GetClassesResult']['Message'];
-     } else {
-       $return .= '<p>' .$mz_event_calendar_duration .' '. __('Day Event Calendar');
-       $return .=  ' '. date_i18n($mz_date_display, strtotime($mz_timeframe['StartDateTime']));
-       $return .= ' - ';
-       $return .= date_i18n($mz_date_display, strtotime($mz_timeframe['EndDateTime']));
-       $return .= '<h3>' . __('No events published') . '. </h3>';
-       $return .= mz_mbo_schedule_nav($mz_date, "Events", $mz_event_calendar_duration);
+                              $return .= '<div class="mz_mindbody_event_description">';
+                              $return .=  $image;
+                              $return .= "<p>$classDescription</p>";
+                              $return .= '</div>';
+                              $return .= '</td></tr>';
+                          }
+                      }
+                  }
+              }
+              $return .=	'</table></div>';
+          } else {
+              $return .= '<h3>'.__('No events published this period.').'</h3>';
+          }
+      } else {
+          if (! empty($mz_event_data['GetClassesResult']['Message'])) {
+              $return .= $mz_event_data['GetClassesResult']['Message'];
+          } else {
+              $return .= '<p>'.$mz_event_calendar_duration.' '.__('Day Event Calendar');
+              $return .=  ' '.date_i18n($mz_date_display, strtotime($mz_timeframe['StartDateTime']));
+              $return .= ' - ';
+              $return .= date_i18n($mz_date_display, strtotime($mz_timeframe['EndDateTime']));
+              $return .= '<h3>'.__('No events published').'. </h3>';
+              $return .= mz_mbo_schedule_nav($mz_date, 'Events', $mz_event_calendar_duration);
        //$return .= '<pre>'.print_r($mz_event_data,1).'</pre>';
-     }
-
-   }//EOF If Results/Else
-
- } else { // no sessions set in admin
+          }
+      }//EOF If Results/Else
+  } else { // no sessions set in admin
    $return .= '<h2>Error: MBO Event Type IDs must be set in Admin Panel</h2>';
   }
-   $return .= mz_mbo_schedule_nav($mz_date, "Events", $mz_event_calendar_duration);
-   echo $return;
-
+    $return .= mz_mbo_schedule_nav($mz_date, 'Events', $mz_event_calendar_duration);
+    echo $return;
 }
-
-?>

@@ -1,9 +1,8 @@
 <?php
-if (isset($_GET["classDescription"]))
-  {
-    $modal_description = $_GET["classDescription"];
-    $modal_name = $_GET["className"];
-?>
+if (isset($_GET['classDescription'])) {
+    $modal_description = $_GET['classDescription'];
+    $modal_name = $_GET['className'];
+    ?>
 <div class="modal-dialog modal-sm">
     <div class="modal-header">
       <button type="button" class="close" id="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -16,4 +15,5 @@ if (isset($_GET["classDescription"]))
       <button id="close" type="button" class="btn btn-xs" data-dismiss="modal">Close</button>
     </div>
 </div>
-<?php } ?>
+<?php 
+} ?>
